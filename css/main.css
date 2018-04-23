@@ -234,49 +234,125 @@ Screen - Game
    left: 43px;
    width: 236px;
    height: 280px;
-   background-image: url('../assets/scoreboard.png');
-   background-repeat: no-repeat;
+   /*background-image: url('../assets/scoreboard.png');
+   background-repeat: no-repeat;*/
+
+   background-color: #ded895;
+   border: 2px solid #543847;
+   border-radius: 5px;
+   padding: 8px;
+   font-size: 0;
+
    
    z-index: 1000;
 }
 
+.scoreboard__title {
+   font-size: 32px;
+   font-family: Montserrat, sans-serif;
+   text-transform: uppercase;
+   text-align: center;
+   margin-bottom: 8px;
+}
+
+.scoreboard__name {
+
+   width: 100%;
+   margin-bottom: 4px;
+
+}
+
+.scoreboard__email {
+
+   font-size: 0;
+   width: 100%;
+
+}
+
+.scoreboard__email-input {
+
+   display: inline-block;
+   width: 75%;
+
+
+}
+
+.scoreboard__email-submit {
+
+   display: inline-block;
+   width: 25%;
+
+}
+
+.scoreboard__medal-wrapper {
+
+   width: 50%;
+   display: inline-block;
+   vertical-align: middle;
+   margin-bottom: 4px;
+
+}
+
 #medal
 {
-   position: absolute;
+   display: inline-block;
    opacity: 0;
-   top: 114px;
-   left: 32px;
    width: 44px;
    height: 44px;
 }
 
+.scoreboard__scores {
+
+   width: 50%;
+   display: inline-block;
+   vertical-align: middle;
+
+}
+
 #currentscore
 {
-   position: absolute;
-   top: 105px;
-   left: 107px;
-   width: 104px;
+   width: 100%;
+   display: inline-block;
    height: 14px;
+   margin-bottom: 4px;
    text-align: right;
+   vertical-align: top;
+}
+
+#currentscore::before {
+
+   vertical-align: middle;
+   content: "Current Score:";
+   font-size: 12px;
+
 }
 
 #currentscore img
 {
+   vertical-align: middle;
    padding-left: 2px;
 }
 
 #highscore
 {
-   position: absolute;
-   top: 147px;
-   left: 107px;
-   width: 104px;
+   width: 100%;
+   display: inline-block;
    height: 14px;
+   margin-bottom: 4px;
    text-align: right;
+}
+
+#highscore::before {
+
+   vertical-align: middle;
+   content: "High Score:";
+   font-size: 12px;
+
 }
 
 #highscore img
 {
+   vertical-align: middle;
    padding-left: 2px;
 }
 

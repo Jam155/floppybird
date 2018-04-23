@@ -34,8 +34,10 @@
       <meta property="og:site_name" content="Floppy Bird" />
       
       <!-- Style sheets -->
-      <link href="css/reset.css" rel="stylesheet">
-      <link href="css/main.css" rel="stylesheet">
+       <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+       <link href="css/reset.css" rel="stylesheet">
+       <link href="css/main.css" rel="stylesheet">
+
    </head>
    <body>
       <div id="gamecontainer">
@@ -51,9 +53,19 @@
                   <div id="splash"></div>
                   
                   <div id="scoreboard">
-                     <div id="medal"></div>
-                     <div id="currentscore"></div>
-                     <div id="highscore"></div>
+                     <h2 class="scoreboard__title">Game Over</h2>
+                     <div class="scoreboard__medal-wrapper">
+                        <div id="medal"></div>
+                     </div>
+                      <div class="scoreboard__scores">
+                          <div id="currentscore"></div>
+                          <div id="highscore"></div>
+                      </div>
+                     <input class="scoreboard__name" type="text" name="name" placeholder="John Smith" />
+                     <div class="scoreboard__email" id="email">
+                        <input class="scoreboard__email-input" type="email" name="email" placeholder="you@domain.com" />
+                        <input class="scoreboard__email-submit" type="submit" value="Submit" />
+                     </div>
                      <div id="replay"><img src="assets/replay.png" alt="replay"></div>
                   </div>
                   
