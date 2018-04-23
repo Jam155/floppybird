@@ -233,7 +233,7 @@ Screen - Game
    top: 64px;
    left: 43px;
    width: 236px;
-   height: 280px;
+   /** height: 280px; **/
    /*background-image: url('../assets/scoreboard.png');
    background-repeat: no-repeat;*/
 
@@ -286,7 +286,7 @@ Screen - Game
 
 .scoreboard__medal-wrapper {
 
-   width: 50%;
+   width: 44px;
    display: inline-block;
    vertical-align: middle;
    margin-bottom: 4px;
@@ -296,14 +296,15 @@ Screen - Game
 #medal
 {
    display: inline-block;
-   opacity: 0;
    width: 44px;
    height: 44px;
+   background: rgba(0, 0, 0, 0.1);
+   border-radius: 44px;
 }
 
 .scoreboard__scores {
 
-   width: 50%;
+   width: 172px;
    display: inline-block;
    vertical-align: middle;
 
@@ -358,11 +359,8 @@ Screen - Game
 
 #replay
 {
-   position: absolute;
+    margin-top: 8px;
    opacity: 0;
-   top: 205px;
-   left: 61px;
-   height: 115px;
    width: 70px;
    cursor: pointer;
 }

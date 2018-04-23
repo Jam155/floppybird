@@ -250,7 +250,7 @@ function gameloop() {
 }
 
 //Handle space bar
-$(document).keydown(function(e){
+/*$(document).keydown(function(e){
    //space bar!
    if(e.keyCode == 32)
    {
@@ -260,7 +260,7 @@ $(document).keydown(function(e){
       else
          screenClick();
    }
-});
+});*/
 
 //Handle mouse down OR touch start
 if("ontouchstart" in window)
@@ -326,11 +326,11 @@ function setMedal()
    var elemmedal = $("#medal");
    elemmedal.empty();
    
-   if(score < 10)
+   if(score < 1)
       //signal that no medal has been won
       return false;
    
-   if(score >= 10)
+   if(score >= 1)
       medal = "bronze";
    if(score >= 20)
       medal = "silver";
@@ -430,6 +430,25 @@ function showScore()
    replayclickable = true;
 }
 
+$('.scoreboard__email-submit').on('click', function(e) {
+
+   e.preventDefault();
+
+   let nameInput = $('.scoreboard__name');
+   let emailInput = $('.scoreboard__email-input');
+   let submit = $('.scoreboard__email-submit');
+
+   nameInput.prop('disabled', true);
+   emailInput.prop('disabled', true);
+   submit.prop('disabled', true);
+
+   let name = nameInput.val();
+   let email = emailInput.val();
+
+   addUserScore(name, email, score);
+
+});
+
 $("#replay").click(function() {
    //make sure we can only click once
    if(!replayclickable)
@@ -439,6 +458,16 @@ $("#replay").click(function() {
    //SWOOSH!
    soundSwoosh.stop();
    soundSwoosh.play();
+
+    let nameInput = $('.scoreboard__name');
+    let emailInput = $('.scoreboard__email-input');
+    let submit = $('.scoreboard__email-submit');
+
+    nameInput.prop('disabled', false);
+    emailInput.prop('disabled', false);
+    submit.prop('disabled', false);
+    nameInput.val("");
+    emailInput.val("");
    
    //fade out the scoreboard
    $("#scoreboard").transition({ y: '-40px', opacity: 0}, 1000, 'ease', function() {
