@@ -55,6 +55,7 @@ var loopGameloop;
 var loopPipeloop;
 
 $(document).ready(function() {
+
    if(window.location.search == "?debug")
       debugmode = true;
    if(window.location.search == "?easy")
@@ -66,6 +67,7 @@ $(document).ready(function() {
       highscore = parseInt(savedscore);
    
    //start with the splash screen
+    console.log("Game Loaded");
    showSplash();
 });
 
@@ -115,7 +117,8 @@ function showSplash()
    $(".animated").css('-webkit-animation-play-state', 'running');
    
    //fade in the splash
-   $("#splash").transition({ opacity: 1 }, 2000, 'ease');
+    $("#splash").css({opacity: 1});
+   //$("#splash").transition({ opacity: 1 }, 2000, 'ease');
 }
 
 function startGame()
@@ -268,6 +271,16 @@ if("ontouchstart" in window)
 else
    $(document).on("mousedown", screenClick);
 
+$(document).ready(function() {
+
+   setTimeout(function() {
+
+       $('.shareboard').css({"display": "none"});
+
+   }, 500);
+
+});
+
 function screenClick()
 {
    if(currentstate == states.GameScreen)
@@ -387,6 +400,7 @@ function showScore()
 {
    //unhide us
    $("#scoreboard").css("display", "block");
+   $('.shareboard').css('display', 'block');
    
    //remove the big score
    setBigScore(true);
@@ -425,6 +439,8 @@ function showScore()
          $("#medal").transition({ opacity: 1, scale: 1 }, 1200, 'ease');
       }
    });
+
+   $('.shareboard').transition({opacity: 1}, 600, 'ease');
    
    //make the replay button clickable
    replayclickable = true;
@@ -434,16 +450,16 @@ $('.scoreboard__email-submit').on('click', function(e) {
 
    e.preventDefault();
 
-   let nameInput = $('.scoreboard__name');
-   let emailInput = $('.scoreboard__email-input');
-   let submit = $('.scoreboard__email-submit');
+   var nameInput = $('.scoreboard__name');
+   var emailInput = $('.scoreboard__email-input');
+   var submit = $('.scoreboard__email-submit');
 
    nameInput.prop('disabled', true);
    emailInput.prop('disabled', true);
    submit.prop('disabled', true);
 
-   let name = nameInput.val();
-   let email = emailInput.val();
+   var name = nameInput.val();
+   var email = emailInput.val();
 
    addUserScore(name, email, score);
 
@@ -459,9 +475,9 @@ $("#replay").click(function() {
    soundSwoosh.stop();
    soundSwoosh.play();
 
-    let nameInput = $('.scoreboard__name');
-    let emailInput = $('.scoreboard__email-input');
-    let submit = $('.scoreboard__email-submit');
+    var nameInput = $('.scoreboard__name');
+    var emailInput = $('.scoreboard__email-input');
+    var submit = $('.scoreboard__email-submit');
 
     nameInput.prop('disabled', false);
     emailInput.prop('disabled', false);
