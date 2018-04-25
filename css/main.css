@@ -124,6 +124,7 @@ html,
 body
 {
    height: 100%;
+   max-width: 100%;
    overflow: hidden;
    font-family: monospace;
    font-size: 12px;
@@ -243,6 +244,20 @@ Screen - Game
 
 }
 
+@media screen and (max-width: 600px) {
+
+   .shareboard {
+
+      top: 300px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 236px;
+
+   }
+
+
+}
+
 .shareboard__title {
    font-size: 16px;
 }
@@ -299,6 +314,17 @@ Screen - Game
 
    
    z-index: 1000;
+}
+
+@media screen and (max-width: 600px) {
+
+   #scoreboard {
+
+      left: 50%;
+      transform: translateX(-50%);
+
+   }
+
 }
 
 .scoreboard__title {

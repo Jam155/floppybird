@@ -24,6 +24,7 @@ var states = Object.freeze({
 });
 
 var currentstate;
+var description = "I scored %d on Flappy Bird by Kino Creative. Free prizes for people playing at NEExpo";
 
 var gravity = 0.25;
 var velocity = 0;
@@ -60,7 +61,19 @@ $(document).ready(function() {
       debugmode = true;
    if(window.location.search == "?easy")
       pipeheight = 200;
-   
+
+   if ($(window).width() <= 600) {
+
+       $('#scoreboard').addClass('small');
+       $('.shareboard').addClass('small');
+
+   } else {
+
+       $('#scoreboard').removeClass('small');
+       $('.shareboard').removeClass('small');
+
+   }
+
    //get the highscore
    var savedscore = getCookie("highscore");
    if(savedscore != "")
@@ -70,6 +83,12 @@ $(document).ready(function() {
     console.log("Game Loaded");
    showSplash();
 });
+
+function getDescription(score) {
+
+    return description.replace("%d", score);
+
+}
 
 function getCookie(cname)
 {
@@ -275,9 +294,10 @@ $(document).ready(function() {
 
    setTimeout(function() {
 
+       $('.shareboard').css({"opacity": "0"});
        $('.shareboard').css({"display": "none"});
 
-   }, 500);
+   }, 1000);
 
 });
 
@@ -401,7 +421,8 @@ function showScore()
    //unhide us
    $("#scoreboard").css("display", "block");
    $('.shareboard').css('display', 'block');
-   
+
+   $('meta[property="og:description"]').prop('content', getDescription(score));
    //remove the big score
    setBigScore(true);
    
@@ -422,11 +443,27 @@ function showScore()
    //SWOOSH!
    soundSwoosh.stop();
    soundSwoosh.play();
-   
+
+   var scoreboard = $("#scoreboard");
+   var cssProperties = {
+       y: "40px",
+       opacity: 0
+   };
+
+   if (scoreboard.hasClass('small')) {
+       cssProperties.x = "-50%";
+   } else {
+       cssProperties.x = "0px";
+   }
+
    //show the scoreboard
-   $("#scoreboard").css({ y: '40px', opacity: 0 }); //move it down so we can slide it up
+   scoreboard.css(cssProperties); //move it down so we can slide it up
    $("#replay").css({ y: '40px', opacity: 0 });
-   $("#scoreboard").transition({ y: '0px', opacity: 1}, 600, 'ease', function() {
+
+   cssProperties.y = "0px";
+   cssProperties.opacity = 1;
+
+   scoreboard.transition(cssProperties, 600, 'ease', function() {
       //When the animation is done, animate in the replay button and SWOOSH!
       soundSwoosh.stop();
       soundSwoosh.play();
@@ -440,7 +477,21 @@ function showScore()
       }
    });
 
-   $('.shareboard').transition({opacity: 1}, 600, 'ease');
+   var shareboard = $('.shareboard');
+
+   if (shareboard.hasClass('small')) {
+
+       shareboard.css({y: '-40px', x: '-50%'});
+       shareboard.transition({y: '0px', x: '-50%', opacity: 1}, 600, 'ease');
+
+   } else {
+
+       shareboard.css({y: '-40px', x: '0px'});
+       shareboard.transition({y: '0px', opacity: 1}, 600, 'ease');
+
+   }
+
+
    
    //make the replay button clickable
    replayclickable = true;
@@ -484,11 +535,43 @@ $("#replay").click(function() {
     submit.prop('disabled', false);
     nameInput.val("");
     emailInput.val("");
-   
+
+    var shareboard = $('.shareboard');
+
+    var cssProperties = {
+        y: '40px',
+        opacity: 0
+    };
+
+    if (shareboard.hasClass('small')) {
+
+        cssProperties.x = "-50%";
+
+    } else {
+
+        cssProperties.x = "0px";
+
+    }
+
+    shareboard.transition(cssProperties, 1000, 'ease', function() {
+
+        shareboard.css("display", "none");
+
+    });
+
+    var scoreboard = $("#scoreboard");
+    cssProperties.y = '-40px';
+
+    if (scoreboard.hasClass('small')) {
+        scoreboard.x = "-50%";
+    } else {
+        scoreboard.x = "0px";
+    }
+
    //fade out the scoreboard
-   $("#scoreboard").transition({ y: '-40px', opacity: 0}, 1000, 'ease', function() {
+   scoreboard.transition(cssProperties, 1000, 'ease', function() {
       //when that's done, display us back to nothing
-      $("#scoreboard").css("display", "none");
+      scoreboard.css("display", "none");
       
       //start the game over!
       showSplash();
