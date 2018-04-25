@@ -55,6 +55,22 @@ buzz.all().setVolume(volume);
 var loopGameloop;
 var loopPipeloop;
 
+function addSizeClasses() {
+
+    if ($(window).width() <= 600) {
+
+        $('#scoreboard').addClass('small');
+        $('.shareboard').addClass('small');
+
+    } else {
+
+        $('#scoreboard').removeClass('small');
+        $('.shareboard').removeClass('small');
+
+    }
+
+}
+
 $(document).ready(function() {
 
    if(window.location.search == "?debug")
@@ -62,17 +78,14 @@ $(document).ready(function() {
    if(window.location.search == "?easy")
       pipeheight = 200;
 
-   if ($(window).width() <= 600) {
 
-       $('#scoreboard').addClass('small');
-       $('.shareboard').addClass('small');
+   addSizeClasses();
 
-   } else {
+    $(window).on("orientationchange", function() {
 
-       $('#scoreboard').removeClass('small');
-       $('.shareboard').removeClass('small');
+       addSizeClasses();
 
-   }
+   });
 
    //get the highscore
    var savedscore = getCookie("highscore");
@@ -487,7 +500,7 @@ function showScore()
    } else {
 
        shareboard.css({y: '-40px', x: '0px'});
-       shareboard.transition({y: '0px', opacity: 1}, 600, 'ease');
+       shareboard.transition({y: '0px', x: '0px', opacity: 1}, 600, 'ease');
 
    }
 
